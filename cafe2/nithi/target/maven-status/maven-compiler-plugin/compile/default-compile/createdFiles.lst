@@ -1,0 +1,8 @@
+com\example\demo\repository\ItemRepository.class
+com\example\demo\controller\CafeteriaController.class
+com\example\demo\model\Item.class
+com\example\demo\config\DataInitializer.class
+com\example\demo\model\Order.class
+com\example\demo\service\CartService.class
+com\example\demo\CafeApplication.class
+com\example\demo\repository\OrderRepository.class

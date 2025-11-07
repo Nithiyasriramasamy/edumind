@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Cafeteria - Cart</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">🍽️ Campus Cafeteria</h1>
+            <nav class="nav">
+                <a href="/" class="nav-link">Menu</a>
+                <a href="/cart" class="nav-link active">Cart</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <section class="cart-section">
+                <h2>Your Cart</h2>
+                
+                <!-- Success/Error Messages -->
+                <div th:if="${message}" class="alert alert-success" th:text="${message}"></div>
+                <div th:if="${error}" class="alert alert-error" th:text="${error}"></div>
+                
+                <div th:if="${isEmpty}" class="empty-cart">
+                    <div class="empty-cart-icon">🛒</div>
+                    <h3>Your cart is empty</h3>
+                    <p>Add some delicious items from our menu!</p>
+                    <a href="/" class="btn btn-primary">Browse Menu</a>
+                </div>
+                
+                <div th:unless="${isEmpty}" class="cart-content">
+                    <div class="cart-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="item : ${cartItems}">
+                                    <td th:text="${item.name}">Item Name</td>
+                                    <td th:text="'₹' + ${item.price}">₹0.00</td>
+                                    <td>1</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="cart-summary">
+                        <div class="total-amount">
+                            <h3>Total: <span th:text="'₹' + ${#numbers.formatDecimal(totalAmount, 1, 2)}">₹0.00</span></h3>
+                        </div>
+                        
+                        <div class="cart-actions">
+                            <a href="/" class="btn btn-secondary">Continue Shopping</a>
+                            <form th:action="@{/place-order}" method="post" style="display: inline;">
+                                <button type="submit" class="btn btn-success">Place Order & Pay</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Campus Cafeteria. Made with ❤️ for students.</p>
+        </div>
+    </footer>
+</body>
+</html>
